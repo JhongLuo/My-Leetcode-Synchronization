@@ -1,9 +1,9 @@
 class Solution:
     def commonFactors(self, a: int, b: int) -> int:
         if a < b:
-            return self.commonFactors(b, a)
+            a, b = b, a
         
-        # Max Common Divider
+        # Get the Max Common Divider
         while b != 0:
             a, b = b, a % b
         
