@@ -36,7 +36,7 @@ class Solution:
             for nxt in mapper[node]:
                 if nxt != father:
                     b, v = group_dfs(node, nxt, target)
-                    if not b:
+                    if not b or summa > target:
                         return False, None
                     else:
                         summa += v
