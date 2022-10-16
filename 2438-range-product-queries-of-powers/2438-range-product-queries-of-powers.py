@@ -17,13 +17,11 @@ class Solution:
         else:
             return 1 + Solution.find_less(n // 2)
         
-    def productQueries(self, n: int, queries: List[List[int]]) -> List[int]:   
-        
-            
+    def productQueries(self, n: int, queries: List[List[int]]) -> List[int]:               
         powers = []
         while n != 0:
-            powers.append(self.find_less(n))
-            n -= self.powerfor2(powers[-1])
+            powers.append(Solution.find_less(n))
+            n -= Solution.powerfor2(powers[-1])
         powers.sort()
         
         prefixS = [0]
@@ -32,7 +30,7 @@ class Solution:
         
         res = []
         for left, right in queries:
-            res.append(self.powerfor2(prefixS[right + 1] - prefixS[left]))
+            res.append(Solution.powerfor2(prefixS[right + 1] - prefixS[left]))
         return res
             
         
