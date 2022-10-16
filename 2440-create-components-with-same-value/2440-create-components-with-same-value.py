@@ -3,28 +3,32 @@ class Solution:
         sum_v = reduce(lambda x,y: x+y, nums)
         max_v = reduce(max, nums)
         
-        factors = []
-        factor = 2
-        tmp_sum = sum_v
-        while tmp_sum != 1:
-            if tmp_sum % factor == 0:
-                tmp_sum /= factor
-                factors.append(factor)
-            else:
-                factor += 1
+#         factors = []
+#         factor = 2
+#         tmp_sum = sum_v
+#         while tmp_sum != 1:
+#             if tmp_sum % factor == 0:
+#                 tmp_sum /= factor
+#                 factors.append(factor)
+#             else:
+#                 factor += 1
         
-        targets = {1}
+#         targets = {1}
         
-        import itertools
-        for l in range(len(factors)):
-            for subset in itertools.combinations(factors, l):
-                multi = 1
-                for v in subset:
-                    multi *= v
-                if multi >= max_v:
-                    targets.add(multi)
-        targets = list(targets)
-        targets.sort()
+#         import itertools
+#         for l in range(len(factors)):
+#             for subset in itertools.combinations(factors, l):
+#                 multi = 1
+#                 for v in subset:
+#                     multi *= v
+#                 if multi >= max_v:
+#                     targets.add(multi)
+#         targets = list(targets)
+#         targets.sort()
+        targets = []
+        for v in range(max_v, sum_v):
+            if sum_v % v == 0:
+                targets.append(v)
         
         mapper = {v:[] for v in range(len(nums))}
         for src, dst in edges:
