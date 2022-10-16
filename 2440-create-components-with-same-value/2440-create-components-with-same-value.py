@@ -15,6 +15,8 @@ class Solution:
         
         prime_factors = [(v, t) for v, t in prime_factors.items()]
         targets = set()
+        
+        
         def prime2factors(pos, multi):
             if pos == len(prime_factors):
                 if multi >= max_v:
@@ -30,6 +32,7 @@ class Solution:
         prime2factors(0, 1)
         targets = list(targets)
         targets.sort()
+        targets.pop()
         
         mapper = {v:[] for v in range(len(nums))}
         for src, dst in edges:
@@ -41,7 +44,7 @@ class Solution:
             for nxt in mapper[node]:
                 if nxt != father:
                     b, v = group_dfs(node, nxt, target)
-                    if not b:
+                    if not b or summa > target:
                         return False, None
                     else:
                         summa += v
