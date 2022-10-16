@@ -1,4 +1,4 @@
-class Solution:
+class Solution:    
     def componentValue(self, nums: List[int], edges: List[List[int]]) -> int:
         sum_v = reduce(lambda x,y: x+y, nums)
         max_v = reduce(max, nums)
@@ -13,8 +13,7 @@ class Solution:
             else:
                 factor += 1
         
-        targets = {1}
-        
+        targets = set()
         import itertools
         for l in range(len(factors)):
             for subset in itertools.combinations(factors, l):
