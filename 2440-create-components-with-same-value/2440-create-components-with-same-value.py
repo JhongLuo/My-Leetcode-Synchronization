@@ -1,4 +1,4 @@
-class Solution:    
+class Solution:
     def componentValue(self, nums: List[int], edges: List[List[int]]) -> int:
         sum_v = reduce(lambda x,y: x+y, nums)
         max_v = reduce(max, nums)
@@ -13,7 +13,8 @@ class Solution:
             else:
                 factor += 1
         
-        targets = set()
+        targets = {1}
+        
         import itertools
         for l in range(len(factors)):
             for subset in itertools.combinations(factors, l):
@@ -35,15 +36,17 @@ class Solution:
             for nxt in mapper[node]:
                 if nxt != father:
                     b, v = group_dfs(node, nxt, target)
-                    if not b or summa > target:
+                    if not b:
                         return False, None
                     else:
                         summa += v
             
-            if summa + nums[node] > target:
-                return False, None
+            if summa + nums[node] == target:
+                return True, 0
+            elif summa + nums[node] < target:
+                return True, summa + nums[node]
             else:
-                return True, (summa + nums[node]) % target
+                return False, None
         
         for target in targets:
             b, v = group_dfs(None, 0, target)
