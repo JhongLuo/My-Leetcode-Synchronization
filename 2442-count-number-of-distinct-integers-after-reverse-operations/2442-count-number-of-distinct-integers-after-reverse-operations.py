@@ -12,6 +12,5 @@ class Solution:
             if new_v not in st and new_v not in added:
                 added.add(new_v)
                 res += 1
-        # print(added)
         return res
             
