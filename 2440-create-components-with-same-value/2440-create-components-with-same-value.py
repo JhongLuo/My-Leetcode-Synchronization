@@ -41,12 +41,10 @@ class Solution:
                     else:
                         summa += v
             
-            if summa + nums[node] == target:
-                return True, 0
-            elif summa + nums[node] < target:
-                return True, summa + nums[node]
-            else:
+            if summa + nums[node] > target:
                 return False, None
+            else:
+                return True, (summa + nums[node]) % target
         
         for target in targets:
             b, v = group_dfs(None, 0, target)
