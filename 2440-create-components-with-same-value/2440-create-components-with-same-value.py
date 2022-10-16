@@ -3,36 +3,28 @@ class Solution:
         sum_v = reduce(lambda x,y: x+y, nums)
         max_v = reduce(max, nums)
         
-        prime_factors = defaultdict(int)
+        factors = []
         factor = 2
         tmp_sum = sum_v
         while tmp_sum != 1:
             if tmp_sum % factor == 0:
                 tmp_sum /= factor
-                prime_factors[factor] += 1
+                factors.append(factor)
             else:
                 factor += 1
         
-        prime_factors = [(v, t) for v, t in prime_factors.items()]
-        targets = set()
+        targets = {1}
         
-        
-        def prime2factors(pos, multi):
-            if pos == len(prime_factors):
+        import itertools
+        for l in range(len(factors)):
+            for subset in itertools.combinations(factors, l):
+                multi = 1
+                for v in subset:
+                    multi *= v
                 if multi >= max_v:
                     targets.add(multi)
-            else:
-                prime, times = prime_factors[pos]
-                t = 0
-                while t <= times:
-                    prime2factors(pos + 1, multi)
-                    multi *= prime
-                    t += 1
-            
-        prime2factors(0, 1)
         targets = list(targets)
         targets.sort()
-        targets.pop()
         
         mapper = {v:[] for v in range(len(nums))}
         for src, dst in edges:
@@ -44,7 +36,7 @@ class Solution:
             for nxt in mapper[node]:
                 if nxt != father:
                     b, v = group_dfs(node, nxt, target)
-                    if not b or summa > target:
+                    if not b:
                         return False, None
                     else:
                         summa += v
@@ -62,12 +54,3 @@ class Solution:
                 return sum_v // target - 1
         return 0
         
-        
-            
-                    
-            
-            
-        
-        
-        
-    
