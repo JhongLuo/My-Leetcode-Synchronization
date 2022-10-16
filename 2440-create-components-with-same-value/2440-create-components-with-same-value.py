@@ -17,8 +17,8 @@ class Solution:
         targets = set()
         def prime2factors(pos, multi):
             if pos == len(prime_factors):
-                targets.add(multi)
-                return
+                if multi >= max_v:
+                    targets.add(multi)
             else:
                 prime, times = prime_factors[pos]
                 t = 0
