@@ -13,7 +13,7 @@ class Solution:
             else:
                 factor += 1
         
-        targets = set()
+        targets = {1}
         
         import itertools
         for l in range(len(factors)):
@@ -31,12 +31,11 @@ class Solution:
             mapper[src].append(dst)
             mapper[dst].append(src)
         
-        def group_dfs(node, target, visited):
-            visited.add(node)
+        def group_dfs(father, node, target):
             summa = 0
             for nxt in mapper[node]:
-                if nxt not in visited:
-                    b, v = group_dfs(nxt, target, visited)
+                if nxt != father:
+                    b, v = group_dfs(node, nxt, target)
                     if not b:
                         return False, None
                     else:
@@ -50,7 +49,7 @@ class Solution:
                 return False, None
         
         for target in targets:
-            b, v = group_dfs(0, target, set())
+            b, v = group_dfs(None, 0, target)
             if b == True and v == 0:
                 return sum_v // target - 1
         return 0
