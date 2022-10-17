@@ -7,18 +7,21 @@
 
 class Solution:
     def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
+        # refactor tree to map
         mapper = defaultdict(list)
         def build_map(node):
+            def build_sub_map(father, son):
+                mapper[father.val].append(son.val)
+                mapper[son.val].append(father.val)
+                build_map(son)
+                
             if node.left != None:
-                mapper[node.val].append(node.left.val)
-                mapper[node.left.val].append(node.val)
-                build_map(node.left)
+                build_sub_map(node, node.left)
             if node.right != None:
-                mapper[node.val].append(node.right.val)
-                mapper[node.right.val].append(node.val)
-                build_map(node.right)
+                build_sub_map(node, node.right)
         build_map(root)
         
+        # dfs the nodes
         res = list()
         def recur(father_v, node_v, distance):
             if distance == k:
