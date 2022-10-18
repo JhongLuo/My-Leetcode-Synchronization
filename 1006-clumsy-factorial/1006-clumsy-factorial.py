@@ -13,7 +13,6 @@ class Solution:
         elif n == 4:
             return -5
             
-        
     def clumsy(self, n: int) -> int:
         if n == 1:
             return 1
