@@ -11,8 +11,6 @@ class Solution:
         elif n == 4:
             return -5
         else:
-            print(n - 4, Solution.recur(n - 4))
-            print(n, - (n * (n - 1) // (n - 2)) + (n - 3) + Solution.recur(n - 4))
             return - (n * (n - 1) // (n - 2)) + (n - 3) + Solution.recur(n - 4)
         
     def clumsy(self, n: int) -> int:
