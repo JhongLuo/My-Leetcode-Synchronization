@@ -9,13 +9,7 @@ class Solution:
         
         res = 0
         for i in range(len(even_nums)):
-            v = even_nums[i] - even_target[i]
-            v = max(v, -v)
-            res += v
-            
+            res += abs(even_nums[i] - even_target[i])            
         for i in range(len(odd_nums)):
-            v = odd_nums[i] - odd_target[i]
-            v = max(v, -v)
-            res += v
-            
+            res += abs(odd_nums[i] - odd_target[i])
         return res // 4
